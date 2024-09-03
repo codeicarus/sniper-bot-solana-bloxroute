@@ -5,8 +5,9 @@ import mintAddresses from "./mintaddress.json"
 // Define the connection to the Solana network
 const connection = new Connection('https://api.mainnet-beta.solana.com');
 
+// console.log(`${mintAddresses['SDOGE']}`);
 // Function to get the live price of a token given its mint address
-async function getTokenLivePrice(symbol:string, mintAddress: string) {
+export async function getTokenLivePrice(symbol:string, mintAddress: string) {
   try {
     const response = await axios.get(`https://api-v3.raydium.io/mint/price?mints=${mintAddress}`, {
       headers: {
@@ -27,6 +28,11 @@ async function getTokenLivePrice(symbol:string, mintAddress: string) {
     return null;
   }
 }
+
+const sdoge = getTokenLivePrice("123", mintAddresses['SDOGE']);
+
+console.log(sdoge);
+
 
 // Optional: Set an interval to fetch the price continuously
 setInterval(() => {
