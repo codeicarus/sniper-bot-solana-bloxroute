@@ -2,13 +2,13 @@ import axios from "axios";
 import mintAddress from "./mintaddress.json";
 import { getTokenLivePrice } from "./liveprice";
 
-export async function buyToken(amount: Number) {
+export function buyToken(amount: number, inTokenAddress:string, outTokenAddress:string, tokenOwned:number) {
     const AUTH_HEADER = "YWQyZGRmZjktN2M5MC00NDA0LWEwNmEtMWIyZjFlYjkzYzQ4OjQyMzYyNTZlMzNiMDYxMzZjOTQ4OWNlZjYyMzNhNTM2";
 
     const swapPrams = {
         ownerAddress: "YOUR_WALLET_ADDRESS",
-        inToken: `${mintAddress['']}`,//Token you want to pay for
-        outToken: `${mintAddress['']}`,//Token address to buy
+        inToken: inTokenAddress,//Token you want to pay for
+        outToken: outTokenAddress,//Token address to buy
         inAmount: amount,
         slippage: 0.001
     }
@@ -22,6 +22,7 @@ export async function buyToken(amount: Number) {
                 }
             });
             console.log('Buy successuful:', response.data);
+            tokenOwned += amount;
         } catch (error) {
             console.error('Error buying:', error.response ? error.response.data : error.message);
 
