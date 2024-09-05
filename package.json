@@ -13,6 +13,7 @@
     "@raydium-io/raydium-sdk-v2": "^0.1.67-alpha",
     "@solana/web3.js": "^1.95.3",
     "axios": "^1.7.6",
+    "dotenv": "^16.4.5",
     "typescript": "^5.5.4"
   }
 }

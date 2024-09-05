@@ -2,7 +2,7 @@ import axios from "axios";
 import mintAddress from "./mintaddress.json";
 import { getTokenLivePrice } from "./liveprice";
 
-export function buyToken(amount: number, inTokenAddress:string, outTokenAddress:string, tokenOwned:number) {
+export async function buyToken(amount: number, inTokenAddress: string, outTokenAddress: string, tokenOwned: number = 0) {
     const AUTH_HEADER = "YWQyZGRmZjktN2M5MC00NDA0LWEwNmEtMWIyZjFlYjkzYzQ4OjQyMzYyNTZlMzNiMDYxMzZjOTQ4OWNlZjYyMzNhNTM2";
 
     const swapPrams = {
@@ -13,19 +13,17 @@ export function buyToken(amount: number, inTokenAddress:string, outTokenAddress:
         slippage: 0.001
     }
 
-    async function performSwap() {
-        try {
-            const response = await axios.post('https://ny.solana.dex.blxrbdn.com/api/v2/raydium/swap', swapPrams, {
-                headers: {
-                    'Authorization': AUTH_HEADER,
-                    'Content-Type': 'application.json'
-                }
-            });
-            console.log('Buy successuful:', response.data);
-            tokenOwned += amount;
-        } catch (error) {
-            console.error('Error buying:', error.response ? error.response.data : error.message);
+    try {
+        const response = await axios.post('https://ny.solana.dex.blxrbdn.com/api/v2/raydium/swap', swapPrams, {
+            headers: {
+                'Authorization': AUTH_HEADER,
+                'Content-Type': 'application.json'
+            }
+        });
+        console.log('Buy successuful:', response.data);
+        return amount;
+    } catch (error) {
+        console.error('Error buying:', error.response ? error.response.data : error.message);
 
-        }
     }
 }
