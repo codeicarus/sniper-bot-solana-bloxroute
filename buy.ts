@@ -2,7 +2,7 @@ import axios from "axios";
 import mintAddress from "./mintaddress.json";
 import { getTokenLivePrice } from "./liveprice";
 
-export async function buyToken(amount: number, inTokenAddress: string, outTokenAddress: string, tokenOwned: number = 0) {
+export async function buyToken(amount: number, inTokenAddress: string, outTokenAddress: string) {
     const AUTH_HEADER = "YWQyZGRmZjktN2M5MC00NDA0LWEwNmEtMWIyZjFlYjkzYzQ4OjQyMzYyNTZlMzNiMDYxMzZjOTQ4OWNlZjYyMzNhNTM2";
 
     const swapPrams = {
